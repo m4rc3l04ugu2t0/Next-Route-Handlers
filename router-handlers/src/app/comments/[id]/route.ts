@@ -22,3 +22,17 @@ export async function PATCH(
 
   return Response.json(comments[index])
 }
+
+export function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const index = comments.findIndex(
+    (comment) => comment.id === Number(params.id)
+  )
+
+  const deletedComment = comments[index]
+
+  comments.splice(index, 1)
+  return Response.json(deletedComment)
+}
